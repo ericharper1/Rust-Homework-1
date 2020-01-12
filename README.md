@@ -1,6 +1,6 @@
 # Modexp
 
-This is a command-line calculator that calculates an exponential modulo some number
+This is a command-line calculator that calculates an exponential modulo some number.
 
 ## Usage
 
