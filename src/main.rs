@@ -4,6 +4,7 @@ fn test_modexp() {
     assert_eq!(modexp(0, 0, 0), 0);
     assert_eq!(modexp(2, 4, 1), 0);
     assert_eq!(modexp(2, 0, 1), 0);
+    assert_eq!(modexp(2, 31, 3), 2);
 }
 
 fn modexp(x: u64, y: u64, m: u64) -> u64 {
@@ -32,6 +33,11 @@ fn error() -> ! {
     std::process::exit(1);
 }
 
+fn range_error() -> ! {
+    eprintln!("The exponential value provided is out of range");
+    std::process::exit(1);
+}
+
 fn main() {
     // this is used for skipping prog name in cmd-line args
     let mut argv: [u64; 3] = [0; 3];
@@ -43,6 +49,10 @@ fn main() {
 
     if argv[2] == 0 {
         error();
+    }
+
+    if argv[0].pow(argv[1] as u32) > u64::from(u32::max_value()) {
+        range_error();
     }
 
     let res = modexp(argv[0], argv[1], argv[2]);
